@@ -1,4 +1,4 @@
 FROM openjdk:8
-ADD target/achat-1.0.jar achat-1.0.jar
+ADD target/devops_project-1.0.jar devops_project-1.0.jar
 EXPOSE 8082
-ENTRYPOINT ["java","-jar","/achat-1.0.jar"]
+ENTRYPOINT ["java","-jar","/devops_project-1.0.jar"]
