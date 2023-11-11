@@ -30,13 +30,13 @@ services:
     depends_on:
       - mysql
   # Angular Application Service
-  #angular-app:
-  #  image: mohamedskanderromdhani/devops_project1:AngularImage
-  #  container_name: angular
-  #  restart: on-failure
-  #  ports:
-  #    - "4200:80"
-  #  depends_on:
-  #    - spring-app
+  angular-app:
+    image: mohamedskanderromdhani/devops_project1:AngularImage
+    container_name: angular
+    restart: on-failure
+    ports:
+      - "4200:80"
+    depends_on:
+      - spring-app
 volumes:
   db:
