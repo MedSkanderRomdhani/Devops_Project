@@ -1,0 +1,42 @@
+version: '3'
+services:
+  mysql:
+    image: 'mysql:5.7'
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: devops_project
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+ # Spring Boot Application Service
+  spring-app:
+    image: mohamedskanderromdhani/devops_project1:SpringImage
+    container_name: spring
+    restart:  on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devops_project?createDatabaseIfNotExist=true&useUnicode=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_PROFILES_ACTIVE: dev
+      MANAGEMENT_ENDPOINTS_WEB_BASE_PATH: /actuator
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "*"
+      MANAGEMENT_ENDPOINTS_PROMETHEUS_ENABLED: true
+      MANAGEMENT_METRICS_ENABLED: true
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mysql
+  # Angular Application Service
+  angular-app:
+    image: mohamedskanderromdhani/devops_project1:AngularImage
+    container_name: angular
+    restart: on-failure
+    ports:
+      - "4200:80"
+    depends_on:
+      - spring-app
+volumes:
+  db:
