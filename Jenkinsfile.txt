@@ -8,45 +8,20 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build and Test') {
             steps {
-                script {
-                    // Set Maven home, assuming it's configured in Jenkins
-                    def mvnHome = tool 'Maven'
-                    def mavenCmd = "${mvnHome}/bin/mvn"
-
-                    // Maven build command
-                    sh "${mavenCmd} clean install"
-                }
+                sh 'mvn clean test'
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    // Assuming your project has a test phase in the Maven lifecycle
-                    def mvnHome = tool 'Maven'
-                    def mavenCmd = "${mvnHome}/bin/mvn"
-
-                    // Maven test command
-                    sh "${mavenCmd} test"
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Add deployment steps here if needed
-            }
-        }
     }
 
     post {
         success {
-            echo 'Build and tests passed. Ready for deployment.'
+            echo 'Build and tests succeeded BROOOOO !'
         }
         failure {
-            echo 'Build or tests failed. Check the Jenkins console output for details.'
+            echo 'Build or tests failed!'
         }
     }
 }
