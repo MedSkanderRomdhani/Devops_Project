@@ -20,10 +20,13 @@ import java.util.List;
 @AllArgsConstructor
 public class InvoiceServiceImpl implements IInvoiceService {
 
-	final InvoiceRepository invoiceRepository;
-	final OperatorRepository operatorRepository;
-	final InvoiceDetailRepository invoiceDetailRepository;
-	final SupplierRepository supplierRepository;
+	InvoiceRepository invoiceRepository;
+	OperatorRepository operatorRepository;
+	InvoiceDetailRepository invoiceDetailRepository;
+	SupplierRepository supplierRepository;
+
+	public InvoiceServiceImpl() {
+	}
 
 	//commentaire
 	//commentaire 2 developper
