@@ -31,7 +31,7 @@ services:
       - mysql
   # Angular Application Service
   angular-app:
-    image: mohamedskanderromdhani/devops_project1:AngularImage
+    image: mohamedskanderromdhani/devops_project1:AngularImagee
     container_name: angular
     restart: on-failure
     ports:
