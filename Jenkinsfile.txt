@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Make sure to use the correct branch name
-                    git branch: 'oussema', url: 'https://github.com/MedSkanderRomdhani/Devops_Project.git'
+                    git branch: 'Oussema', url: 'https://github.com/MedSkanderRomdhani/Devops_Project.git'
                 }
             }
         }
