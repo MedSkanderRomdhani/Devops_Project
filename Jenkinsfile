@@ -8,20 +8,40 @@ pipeline {
             }
         }
 
-        stage('Build and Test') {
+        stage('Build') {
             steps {
-                sh 'mvn clean test'
+                script {
+                    def mvnHome = tool 'Maven'
+                    def mavenCmd = "${mvnHome}/bin/mvn"
+
+                    sh "${mavenCmd} clean install"
+                }
             }
         }
 
+        stage('Run Tests') {
+            steps {
+                script {
+                    def mvnHome = tool 'Maven'
+                    def mavenCmd = "${mvnHome}/bin/mvn"
+
+                    sh "${mavenCmd} test"
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+            }
+        }
     }
 
     post {
         success {
-            echo 'Build and tests succeeded BROOOOO !'
+            echo 'SUCCESS !! :) '
         }
         failure {
-            echo 'Build or tests failed!'
+            echo 'Build or tests failed.'
         }
     }
 }
