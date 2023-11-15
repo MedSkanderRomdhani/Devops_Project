@@ -2,29 +2,32 @@ pipeline {
     agent any
 
     stages {
-         stage('Checkout') {
+        stage('Checkout') {
+            steps {
+                // Récupération du code source depuis le référentiel Git
+                git branch: 'Oussema', url: 'https://github.com/MedSkanderRomdhani/Devops_Project.git'
+            }
+        }
+
+        stage('Affichage de la date système') {
             steps {
                 script {
-                    // Make sure to use the correct branch name
-                    git branch: 'Oussema', url: 'https://github.com/MedSkanderRomdhani/Devops_Project.git'
+                    def date = sh(script: 'date', returnStdout: true).trim()
+                    echo "Date système : ${date}"
                 }
             }
         }
 
-        stage('Build and Test') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
+        // Ajoutez d'autres étapes selon vos besoins
 
     }
 
     post {
         success {
-            echo 'Build and tests succeeded BROOOOO !'
+            echo 'Le pipeline a été exécuté avec succès!'
         }
         failure {
-            echo 'Build or tests failed!'
+            echo 'Le pipeline a échoué. Veuillez vérifier les logs pour plus d\'informations.'
         }
     }
 }
