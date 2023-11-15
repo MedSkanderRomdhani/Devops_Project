@@ -8,9 +8,19 @@ pipeline {
             }
         }
 
+        stage('Check Maven Installation') {
+            steps {
+                script {
+                    tool 'Maven'
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 script {
+                    tool 'Maven'
+
                     def mvnHome = tool 'Maven'
                     def mavenCmd = "${mvnHome}/bin/mvn"
 
@@ -22,6 +32,9 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
+                    // Print available tools to console
+                    tool 'Maven'
+
                     def mvnHome = tool 'Maven'
                     def mavenCmd = "${mvnHome}/bin/mvn"
 
@@ -29,7 +42,6 @@ pipeline {
                 }
             }
         }
-
     }
 
     post {
