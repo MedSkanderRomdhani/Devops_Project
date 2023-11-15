@@ -4,52 +4,28 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                // Récupération du code source depuis le référentiel Git
+                git branch: 'Oussema', url: 'https://github.com/MedSkanderRomdhani/Devops_Project.git'
             }
         }
 
-        stage('Check Maven Installation') {
+        stage('Affichage de la date système') {
             steps {
                 script {
-                    tool 'Maven'
+                    def date = sh(script: 'date', returnStdout: true).trim()
+                    echo "Date système : ${date}"
                 }
             }
         }
 
-        stage('Build') {
-            steps {
-                script {
-                    tool 'Maven'
-
-                    def mvnHome = tool 'Maven'
-                    def mavenCmd = "${mvnHome}/bin/mvn"
-
-                    sh "${mavenCmd} clean install"
-                }
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                script {
-                    // Print available tools to console
-                    tool 'Maven'
-
-                    def mvnHome = tool 'Maven'
-                    def mavenCmd = "${mvnHome}/bin/mvn"
-
-                    sh "${mavenCmd} test"
-                }
-            }
-        }
     }
 
     post {
         success {
-            echo 'SUCCESS !! :) '
+            echo 'Le pipeline a été exécuté avec succès!'
         }
         failure {
-            echo 'Build or tests failed.'
+            echo 'Le pipeline a échoué. Veuillez vérifier les logs pour plus d\'informations.'
         }
     }
 }
