@@ -9,9 +9,7 @@ services:
       - "3306:3306"
     volumes:
       - db_vol:/var/lib/mysql
-    networks:
-      - devops_network
-
+      -
   backend_app:
     image: syndamejri/project-devops:latest
     container_name: backend_app
@@ -31,18 +29,3 @@ services:
     restart: on-failure
     stdin_open: true
     tty: true
-
-    networks:
-      - devops_network
-
-
-
-
-  frontend_app:
-    image: syndamejri/frontend:3.0
-    container_name: front_end
-    ports:
-      - "4200:80"
-    restart: on-failure
-    depends_on:
-      - backend_app
