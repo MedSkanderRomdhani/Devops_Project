@@ -2,7 +2,7 @@ pipeline {
     agent any
       environment {
             DB_URL = 'jdbc:mysql://localhost:3306/devops_project'
-            DB_USERNAME = 'admin'
+            DB_USERNAME = 'root'
             DB_PASSWORD = ''
         }
 
