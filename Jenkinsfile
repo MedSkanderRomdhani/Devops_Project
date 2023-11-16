@@ -8,6 +8,11 @@ pipeline {
                 git branch: 'Oussema', url: 'https://github.com/MedSkanderRomdhani/Devops_Project.git'
             }
         }
+        stage('Build and Test') {
+             steps {
+                    sh 'mvn clean test'
+                   }
+               }
 
         stage('Affichage de la date système') {
             steps {
