@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Git') {
             steps {
                 git branch: 'Oussema', url: 'https://github.com/MedSkanderRomdhani/Devops_Project.git'
             }
@@ -16,7 +16,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Junit / Mockito') {
             steps {
                 script {
                     sh 'mvn test'
