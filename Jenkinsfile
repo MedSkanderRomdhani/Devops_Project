@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    environment {
-        DB_URL = 'jdbc:mysql://localhost:3306/devops_project'
-        DB_USERNAME = 'iheb'
-        DB_PASSWORD = 'root'
-    }
+     environment {
+           DB_URL = 'jdbc:mysql://192.168.1.1:3306/devops_project'
+           DB_USERNAME = 'iheb'
+           DB_PASSWORD = 'root'
+       }
 
     stages {
         stage('Checkout') {
