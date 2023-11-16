@@ -24,7 +24,7 @@ services:
       - MYSQL_PASSWORD=sonar
       - MYSQL_DATABASE=sonar
   app:
-    image: devopsProject
+    image: devopsprojectv1
     ports:
       - "8082:8080"  # Adjust the port as needed
     networks:
