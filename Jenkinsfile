@@ -9,25 +9,25 @@ pipeline {
         }
                stage('Clean') {
                    steps {
-                           sh clean
+                           sh mvn clean
                    }
                }
 
                stage('Test') {
                    steps {
-                   sh test
+                   sh mvn test
                    }
                }
 
                stage('Compile') {
                    steps {
-                           sh compile
+                           sh mvn compile
                    }
                }
 
                stage('SonarQube') {
                    steps {
-                         sh sonar:sonar
+                         sh mvn sonar:sonar
                    }
                }
 
