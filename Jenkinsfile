@@ -3,7 +3,7 @@ pipeline {
       environment {
             DB_URL = 'jdbc:mysql://localhost:3306/devops_project'
             DB_USERNAME = 'admin'
-            DB_PASSWORD = 'admin'
+            DB_PASSWORD = ''
         }
 
     stages {
