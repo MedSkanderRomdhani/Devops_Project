@@ -13,7 +13,7 @@ services:
       - devops_network
 
   backend_app:
-    image: mouhibtouaiti/project-devop:latest
+    image: syndamejri/project-devops:latest
     container_name: backend_app
     environment:
       SPRING_APPLICATION_JSON: '{
