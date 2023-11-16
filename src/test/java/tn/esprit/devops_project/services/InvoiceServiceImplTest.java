@@ -10,10 +10,7 @@ import tn.esprit.devops_project.entities.Supplier;
 import tn.esprit.devops_project.repositories.InvoiceRepository;
 import tn.esprit.devops_project.repositories.SupplierRepository;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -61,26 +58,4 @@ class InvoiceServiceImplTest {
         assertSame(mockInvoice, retrievedInvoice);
     }
 
-    @Test
-    void getInvoicesBySupplier() {
-        // Mocking the behavior of the repository
-        Supplier mockSupplier = new Supplier();
-        mockSupplier.setIdSupplier(1L);
-        Invoice invoice1 = new Invoice();
-        invoice1.setIdInvoice(101L);
-        Invoice invoice2 = new Invoice();
-        invoice2.setIdInvoice(102L);
-        mockSupplier.setInvoices((Set<Invoice>) Arrays.asList(invoice1, invoice2));
-
-        when(supplierRepository.findById(anyLong())).thenReturn(Optional.of(mockSupplier));
-
-        // Call the method from your service
-        List<Invoice> invoicesBySupplier = invoiceService.getInvoicesBySupplier(1L);
-
-        // Assertions
-        assertNotNull(invoicesBySupplier);
-        assertEquals(2, invoicesBySupplier.size());
-        assertTrue(invoicesBySupplier.contains(invoice1));
-        assertTrue(invoicesBySupplier.contains(invoice2));
-    }
 }

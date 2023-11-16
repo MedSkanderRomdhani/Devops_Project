@@ -35,21 +35,21 @@ class ProductServiceImplTest {
 
     @Test
     void addProduct() {
-        // Mocking the behavior of the repositories
+        // Arrange (setup)
         Product productToAdd = new Product();
-        Stock mockStock = new Stock();
-        mockStock.setIdStock(1L);
+        Stock existingStock = new Stock();
+        existingStock.setIdStock(1L);
 
-        when(stockRepository.findById(anyLong())).thenReturn(Optional.of(mockStock));
+        when(stockRepository.findById(1L)).thenReturn(Optional.of(existingStock));
         when(productRepository.save(any(Product.class))).thenReturn(productToAdd);
 
-        // Call the method from your service
-        Product addedProduct = productService.addProduct(new Product(), 1L);
+        // Act (execution)
+        Product addedProduct = productService.addProduct(productToAdd, 1L);
 
-        // Assertions or verifications
+        // Assert (verification)
         assertNotNull(addedProduct);
-        assertSame(mockStock, addedProduct.getStock());
-        verify(stockRepository, times(1)).findById(anyLong());
+        assertSame(existingStock, addedProduct.getStock());
+        verify(stockRepository, times(1)).findById(1L);
         verify(productRepository, times(1)).save(any(Product.class));
     }
 
