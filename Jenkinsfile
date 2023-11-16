@@ -27,8 +27,9 @@ pipeline {
 
                stage('SonarQube') {
                    steps {
-                         sh mvn sonar:sonar
-                   }
+                withSonarQubeEnv('SonarQube') {
+                    bat 'mvn package sonar:sonar'
+                }                   }
                }
 
         stage('Affichage de la date système') {
