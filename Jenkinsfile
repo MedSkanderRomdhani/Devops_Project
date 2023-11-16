@@ -4,13 +4,30 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Récupération du code source depuis le référentiel Git
                 git branch: 'Oussema', url: 'https://github.com/MedSkanderRomdhani/Devops_Project.git'
             }
         }
-        stage('Build and Test') {
-             steps {
-                    sh 'mvn clean test'
+               stage('Clean') {
+                   steps {
+                           sh clean
+                   }
+               }
+
+               stage('Test') {
+                   steps {
+                   sh test
+                   }
+               }
+
+               stage('Compile') {
+                   steps {
+                           sh compile
+                   }
+               }
+
+               stage('SonarQube') {
+                   steps {
+                         sh sonar:sonar
                    }
                }
 
