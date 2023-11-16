@@ -16,13 +16,7 @@ pipeline {
             }
         }
 
-        stage('Junit / Mockito') {
-            steps {
-                script {
-                    sh 'mvn test'
-                }
-            }
-        }
+
 
         stage('Compile') {
             steps {
@@ -41,12 +35,17 @@ pipeline {
                 }
             }
         }
-
-        stage('Affichage de la date système') {
+        stage('Junit / Mockito') {
             steps {
                 script {
-                    def date = sh(script: 'date', returnStdout: true).trim()
-                    echo "Date système : ${date}"
+                    sh 'mvn test'
+                }
+            }
+        }
+        stage('Nexus') {
+            steps {
+                script {
+                    sh "mvn deploy -DskipTests"
                 }
             }
         }
