@@ -7,30 +7,40 @@ pipeline {
                 git branch: 'Oussema', url: 'https://github.com/MedSkanderRomdhani/Devops_Project.git'
             }
         }
-               stage('Clean') {
-                   steps {
-                           sh mvn clean
-                   }
-               }
 
-               stage('Test') {
-                   steps {
-                   sh mvn test
-                   }
-               }
+        stage('Clean') {
+            steps {
+                script {
+                    sh 'mvn clean'
+                }
+            }
+        }
 
-               stage('Compile') {
-                   steps {
-                           sh mvn compile
-                   }
-               }
+        stage('Test') {
+            steps {
+                script {
+                    sh 'mvn test'
+                }
+            }
+        }
 
-               stage('SonarQube') {
-                   steps {
-                withSonarQubeEnv('SonarQube') {
-                    bat 'mvn package sonar:sonar'
-                }                   }
-               }
+        stage('Compile') {
+            steps {
+                script {
+                    sh 'mvn compile'
+                }
+            }
+        }
+
+        stage('SonarQube') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube') {
+                        sh 'mvn package sonar:sonar'
+                    }
+                }
+            }
+        }
 
         stage('Affichage de la date système') {
             steps {
@@ -40,7 +50,6 @@ pipeline {
                 }
             }
         }
-
     }
 
     post {
