@@ -26,7 +26,7 @@ services:
   app:
     image: devopsprojectv1
     ports:
-      - "8082:8080"  # Adjust the port as needed
+      - "8082:8083"  # Adjust the port as needed
     networks:
       - sonarnetwork
 
