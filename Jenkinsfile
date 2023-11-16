@@ -8,20 +8,13 @@ pipeline {
             }
         }
 
-        stage('Clean') {
-            steps {
-                script {
-                    sh 'mvn clean'
-                }
-            }
-        }
 
 
 
         stage('Compile') {
             steps {
                 script {
-                    sh 'mvn compile'
+                    sh 'mvn clean compile'
                 }
             }
         }
